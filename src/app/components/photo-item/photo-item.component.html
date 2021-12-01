@@ -1,0 +1,14 @@
+<a
+  *ngIf="photo"
+  href="https://www.flickr.com/photos/{{ photo.owner }}/{{ photo.id }}"
+  (click)="handleClick($event)"
+  class="link"
+  data-testid="photo-item-link"
+>
+  <img
+    src="{{ photo.url_q }}"
+    alt="{{ photo.title }}"
+    class="image"
+    data-testid="photo-item-image"
+  />
+</a>

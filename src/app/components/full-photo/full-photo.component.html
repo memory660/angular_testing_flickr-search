@@ -1,0 +1,23 @@
+<ng-container *ngIf="photo">
+  <h2 data-testid="full-photo-title">{{ photo.title }}</h2>
+
+  <p>
+    <img src="{{ photo.url_m }}" alt="{{ photo.title }}" data-testid="full-photo-image" />
+  </p>
+
+  <p data-testid="full-photo-ownername">{{ photo.ownername }}</p>
+
+  <p data-testid="full-photo-datetaken">{{ photo.datetaken }}</p>
+
+  <p data-testid="full-photo-tags">{{ photo.tags }}</p>
+
+  <p>
+    <a
+      href="https://www.flickr.com/photos/{{ photo.owner }}/{{ photo.id }}"
+      data-testid="full-photo-link"
+      target="_top"
+    >
+      https://www.flickr.com/photos/{{ photo.owner }}/{{ photo.id }}
+    </a>
+  </p>
+</ng-container>
