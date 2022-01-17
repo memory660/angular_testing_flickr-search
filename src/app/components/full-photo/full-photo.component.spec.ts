@@ -17,21 +17,26 @@ describe('FullPhotoComponent', () => {
 
     fixture = TestBed.createComponent(FullPhotoComponent);
     component = fixture.componentInstance;
+    // initialisation
     component.photo = photo1;
     fixture.detectChanges();
   });
 
   it('renders the photo information', () => {
-    expectText(fixture, 'full-photo-title', photo1.title);
+    // verifier le contenu d'une balise
+    expectText(fixture, 'full-photo-title', photo1.title); //  <h2 data-testid="full-photo-title">{{ photo.title }}</h2>
 
-    const img = findEl(fixture, 'full-photo-image');
+    // verifier la balise img
+    const img = findEl(fixture, 'full-photo-image'); // <img src="{{ photo.url_m }}" alt="{{ photo.title }}" data-testid="full-photo-image" />
     expect(img.properties.src).toBe(photo1.url_m);
     expect(img.properties.alt).toBe(photo1.title);
 
+    // verifier le contenu d'autres balises
     expectText(fixture, 'full-photo-ownername', photo1.ownername);
     expectText(fixture, 'full-photo-datetaken', photo1.datetaken);
     expectText(fixture, 'full-photo-tags', photo1.tags);
 
+    // verifier la balise <a
     const link = findEl(fixture, 'full-photo-link');
     expect(link.properties.href).toBe(photo1Link);
     expect(link.nativeElement.textContent.trim()).toBe(photo1Link);

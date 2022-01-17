@@ -20,10 +20,12 @@ describe('SearchFormComponent', () => {
   });
 
   it('starts a search', () => {
+    // verification que la saisie d'un champ déclenche le emit avec la bonne valeur (celle saisie)
     const preventDefault = jasmine.createSpy('submit preventDefault');
 
     let actualSearchTerm: string | undefined;
 
+    // @Output() public search =
     component.search.subscribe((otherSearchTerm: string) => {
       actualSearchTerm = otherSearchTerm;
     });

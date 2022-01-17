@@ -18,14 +18,17 @@ describe('PhotoItemComponent', () => {
 
     fixture = TestBed.createComponent(PhotoItemComponent);
     component = fixture.componentInstance;
+    // initialisation
     component.photo = photo1;
     fixture.detectChanges();
   });
 
   it('renders a link and a thumbnail', () => {
+    // verifier la balise <a...
     const link = findEl(fixture, 'photo-item-link');
     expect(link.properties.href).toBe(photo1Link);
 
+    // verifier la balise <img...
     const img = findEl(fixture, 'photo-item-image');
     expect(img.properties.src).toBe(photo1.url_q);
     expect(img.properties.alt).toBe(photo1.title);
@@ -34,12 +37,16 @@ describe('PhotoItemComponent', () => {
   it('focusses a photo on click', () => {
     let photo: Photo | undefined;
 
+    // on souscrit à un @Output afin de verifier le contenu émit
+    // @Output() public focusPhoto = new EventEmitter<Photo>();
     component.focusPhoto.subscribe((otherPhoto: Photo) => {
       photo = otherPhoto;
     });
 
+    // <a  (click)="handleClick($event)"...     est appelé donc execute dans la fonction : this.focusPhoto.emit(this.photo);
     click(fixture, 'photo-item-link');
 
+    // la souscription plus haut reçoit : photo que l'on compare à photo1
     expect(photo).toBe(photo1);
   });
 
@@ -47,6 +54,8 @@ describe('PhotoItemComponent', () => {
     component.photo = null;
     fixture.detectChanges();
 
+    // verifie qu'une exception est levé car il ne trouve pas la balise <a...
+    // <a *ngIf="photo"...
     expect(() => {
       findEl(fixture, 'photo-item-link');
     }).toThrow();
